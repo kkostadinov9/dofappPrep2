@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginxprep-deploy
+  name: role-nginx
 spec:
   replicas: 1
   selector:
     matchLabels: 
-      app: nginxprep
+      app: role-nginx
   minReadySeconds: 10
   strategy:
     type: RollingUpdate
@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       labels:
-        app: nginxprep
+        app: role-nginx
     spec:
       containers:
       - name: app-cont
@@ -36,9 +36,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginxprep-svc
+  name: role-nginx
   labels:
-    app: nginxprep
+    app: role-nginx
 spec:
   type: NodePort
   ports:
@@ -46,4 +46,4 @@ spec:
     nodePort: 31000
     protocol: TCP
   selector:
-    app: nginxprep
+    app: role-nginx
