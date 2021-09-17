@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxprep-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: nginxprep
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: nginxprep
+    spec:
+      containers:
+      - name: app-cont
+        image: kkostadinov9/nginxprep:%IMAGE-PLACEHOLDER%
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /site
+          name: app
+      volumes:
+      - name: app
+        hostPath:
+          path: ./app
+          type: Directory
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxprep-svc
+  labels:
+    app: nginxprep
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 31000
+    protocol: TCP
+  selector:
+    app: nginxprep
