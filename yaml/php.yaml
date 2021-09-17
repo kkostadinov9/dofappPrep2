@@ -44,7 +44,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 900
+  - port: 9000
     protocol: TCP
   selector:
     app: role-php
