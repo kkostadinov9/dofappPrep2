@@ -19,7 +19,7 @@ spec:
         app: role-nginx
     spec:
       containers:
-      - name: app-cont
+      - name: role-nginx
         image: kkostadinov9/nginxprep:%IMAGE-PLACEHOLDER%
         ports:
         - containerPort: 80
