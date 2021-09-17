@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: role-nginx
+  name: nginx-host
 spec:
   replicas: 1
   selector:
     matchLabels: 
-      app: role-nginx
+      app: nginx-host
   minReadySeconds: 10
   strategy:
     type: RollingUpdate
@@ -16,10 +16,10 @@ spec:
   template:
     metadata:
       labels:
-        app: role-nginx
+        app: nginx-host
     spec:
       containers:
-      - name: role-nginx
+      - name: nginx-host
         image: kkostadinov9/nginxprep:%IMAGE-PLACEHOLDER%
         ports:
         - containerPort: 80
@@ -38,9 +38,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: role-nginx
+  name: nginx-host
   labels:
-    app: role-nginx
+    app: nginx-host
 spec:
   type: NodePort
   ports:
@@ -48,4 +48,4 @@ spec:
     nodePort: 31000
     protocol: TCP
   selector:
-    app: role-nginx
+    app: nginx-host
