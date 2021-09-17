@@ -29,7 +29,7 @@ spec:
       volumes:
       - name: app
         hostPath:
-          path: app/
+          path: app
           type: Directory
       
 ---
