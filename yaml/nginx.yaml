@@ -25,12 +25,14 @@ spec:
         - containerPort: 80
         volumeMounts:
         - mountPath: /site
+          subPath: app/
           name: app
       volumes:
       - name: app
-        hostPath:
-          path: app
-          type: Directory
+        gitRepo:
+          repository: "https://github.com/kkostadinov9/dofappPrep2.git"
+          revision: "main"
+          directory: .
       
 ---
 apiVersion: v1
